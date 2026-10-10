@@ -1,0 +1,49 @@
+name: Compilar mod
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Instalar Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Instalar Gradle 8.10
+        run: |
+          curl -fsSL https://services.gradle.org/distributions/gradle-8.10-bin.zip -o "$RUNNER_TEMP/gradle.zip"
+          unzip -q "$RUNNER_TEMP/gradle.zip" -d "$HOME"
+          "$HOME/gradle-8.10/bin/gradle" --version
+
+      - name: Compilar
+        run: $HOME/gradle-8.10/bin/gradle build --no-daemon
+
+      - name: Guardar el .jar como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: ruleta-dificultad-jar
+          path: build/libs/ruleta-dificultad-2-*.jar
+
+      - name: Publicar el .jar en Releases
+        uses: ncipollo/release-action@v1
+        with:
+          tag: latest
+          name: Ruleta de Dificultad 2 (última versión)
+          body: Descarga el archivo .jar de abajo y ponlo en la carpeta mods (Fabric 1.21.1 + Fabric API).
+          artifacts: build/libs/ruleta-dificultad-2-*.jar
+          allowUpdates: true
+          replacesArtifacts: true
+          makeLatest: true
+          commit: ${{ github.sha }}
