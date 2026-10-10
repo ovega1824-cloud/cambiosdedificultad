@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "ruletadificultad2",
+  "version": "${version}",
+  "name": "Ruleta de Dificultad 2",
+  "description": "Ruleta multicolor (solo para admins) con un menu de 31 cambios de dificultad que se activan y desactivan.",
+  "authors": [],
+  "license": "MIT",
+  "icon": "assets/ruletadificultad2/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.ruletadificultad2.RuletaDificultad2Mod"
+    ],
+    "client": [
+      "com.ruletadificultad2.client.RuletaDificultad2Client"
+    ]
+  },
+  "mixins": [
+    "ruletadificultad2.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

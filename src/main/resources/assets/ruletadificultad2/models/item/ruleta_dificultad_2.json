@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "ruletadificultad2:item/ruleta_dificultad_2"
+  }
+}

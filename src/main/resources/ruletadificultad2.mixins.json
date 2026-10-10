@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.ruletadificultad2.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LavaFluidMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
